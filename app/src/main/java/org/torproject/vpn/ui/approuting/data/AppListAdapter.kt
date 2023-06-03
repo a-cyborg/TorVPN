@@ -157,7 +157,6 @@ class AppListAdapter(list: List<AppItemModel>,
         fun bind(appItem: AppItemModel, adapter: TorAppsAdapter, layoutManager: LinearLayoutManager) {
             Log.d("--", "bind horizontal layout")
             binding.rvTorApps.adapter = adapter
-            binding.rvTorApps.layoutManager = layoutManager
             appItem.appList?.also {
                 Log.d("--", "updateAppList $it")
                 adapter.update(it)

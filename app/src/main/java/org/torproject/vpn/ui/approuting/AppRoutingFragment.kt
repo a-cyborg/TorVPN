@@ -44,12 +44,14 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
         preferenceHelper.registerListener(this)
 
         // setup vertical list
+        val linearLayout = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+            linearLayout,
             preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
-        binding.rvAppList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        if (binding.rvAppList.layoutManager == null) binding.rvAppList.layoutManager = linearLayout
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
@@ -75,6 +77,7 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding?.rvAppList?.adapter = null
         _binding = null
         appListAdapter.onItemModelChanged = null
         preferenceHelper.unregisterListener(this)
