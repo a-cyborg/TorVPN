@@ -48,7 +48,6 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
 
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
-            linearLayout,
             preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
         if (binding.rvAppList.layoutManager == null) binding.rvAppList.layoutManager = linearLayout

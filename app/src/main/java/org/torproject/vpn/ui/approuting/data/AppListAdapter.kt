@@ -18,7 +18,6 @@ import org.torproject.vpn.utils.PreferenceHelper
 
 class AppListAdapter(list: List<AppItemModel>,
                      var torAppsAdapter: TorAppsAdapter,
-                     var torAppsLayoutManager: LinearLayoutManager,
                      var preferenceHelper: PreferenceHelper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -64,7 +63,6 @@ class AppListAdapter(list: List<AppItemModel>,
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(items[position].viewType) {
             SECTION_HEADER_VIEW -> (holder as AppListTitleViewHolder).bind(items[position])
-            HORIZONTAL_RECYCLER_VIEW -> (holder as HorizontalRecyclerViewItemViewHolder).bind(items[position], torAppsAdapter, torAppsLayoutManager)
             CELL -> (holder as AppListItemViewHolder).bind(items[position], position)
             TABLE_HEADER_VIEW -> (holder as TableHeaderViewHolder).bind(preferenceHelper)
         }
