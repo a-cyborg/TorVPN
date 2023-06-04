@@ -44,13 +44,12 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
         preferenceHelper.registerListener(this)
 
         // setup vertical list
-        val linearLayout = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
         appListAdapter = AppListAdapter(viewModel.getAppList(),
             TorAppsAdapter(viewModel.getAppList()),
             preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
-        if (binding.rvAppList.layoutManager == null) binding.rvAppList.layoutManager = linearLayout
+        if (binding.rvAppList.layoutManager == null) binding.rvAppList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->
