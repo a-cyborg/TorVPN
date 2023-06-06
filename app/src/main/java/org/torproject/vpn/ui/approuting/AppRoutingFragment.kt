@@ -49,7 +49,7 @@ class AppRoutingFragment : Fragment(), SharedPreferences.OnSharedPreferenceChang
             preferenceHelper)
         appListAdapter.onItemModelChanged = viewModel::onItemModelChanged
         if (binding.rvAppList.layoutManager == null) binding.rvAppList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAppList.adapter = appListAdapter
         viewModel.getObservableAppList().observe(viewLifecycleOwner, appListAdapter::update)
         viewModel.getObservableProgress().observe(viewLifecycleOwner) { isLoading ->

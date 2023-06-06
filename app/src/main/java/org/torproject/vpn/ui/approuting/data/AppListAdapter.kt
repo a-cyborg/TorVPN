@@ -152,7 +152,7 @@ class AppListAdapter(list: List<AppItemModel>,
 
     internal class HorizontalRecyclerViewItemViewHolder(val binding: HorizontalRecyclerViewItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
-        fun bind(appItem: AppItemModel, adapter: TorAppsAdapter, layoutManager: LinearLayoutManager) {
+        fun bind(appItem: AppItemModel, adapter: TorAppsAdapter) {
             Log.d("--", "bind horizontal layout")
             binding.rvTorApps.adapter = adapter
             appItem.appList?.also {
